@@ -1,0 +1,33 @@
+{
+  "name": "pstaender/silverstripe-redis-cache",
+  "description": "Enables Redis cache for SilverStripe",
+  "type": "silverstripe-vendormodule",
+  "homepage": "https://github.com/pstaender/silverstripe-redis-cache",
+  "keywords": [
+      "silverstripe",
+      "markdown",
+      "parser"
+  ],
+  "license": "MIT",
+  "support": {
+      "issues": "https://github.com/pstaender/silverstripe-redis-cache/issues"
+  },
+  "authors": [
+      {
+          "name": "Philipp Staender",
+          "email": "pstaender@mailbox.org"
+      }
+  ],
+  "require": {
+      "silverstripe/framework": "~4",
+      "predis/predis": "^1.1"
+  },
+  "require-dev": {
+      "phpunit/phpunit": "^5.7"
+  },
+  "autoload": {
+      "psr-4": {
+          "Zeitpulse\\": "src/"
+      }
+  }
+}
