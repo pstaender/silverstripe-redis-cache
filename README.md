@@ -2,7 +2,13 @@
 
 Enables usage of redis cache for SilverStripe.
 
-Just enable it in your project's config via:
+## Installation and usage
+
+```
+  $ composer require pstaender/silverstripe-redis-cache
+```
+
+To enable it in your project add this to your project's config:
 
 ```yml
 ---
