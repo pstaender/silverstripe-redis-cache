@@ -5,7 +5,7 @@ Enables usage of redis cache for SilverStripe.
 ## Installation and usage
 
 ```
-  $ composer require pstaender/silverstripe-redis-cache
+  $ composer require pstaender/silverstripe-redis-cache dev-master
 ```
 
 To enable it in your project add this to your project's config:
@@ -53,5 +53,25 @@ SilverStripe\Core\Injector\Injector:
 ```
 
 The `REDIS_URL` must be the url of the used redis instance, e.g. `tcp://127.0.0.1:6379`.
+
+## Usage with flyststem asset storage
+
+```yaml
+---
+Name: silverstripes3-flysystem-redis
+Only:
+  envvarset:
+    - REDIS_URL
+After:
+  - '#silverstripes3-flysystem'
+---
+SilverStripe\Core\Injector\Injector:
+  League\Flysystem\Cached\Storage\Memory.public:
+    class: League\Flysystem\Cached\Storage\Predis
+  League\Flysystem\Cached\Storage\Adapter.public:
+    class: League\Flysystem\Cached\Storage\Predis
+  League\Flysystem\Cached\Storage\Adapter.protected:
+    class: League\Flysystem\Cached\Storage\Predis
+```
 
 LICENSE: MIT
