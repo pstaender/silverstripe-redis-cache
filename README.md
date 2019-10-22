@@ -2,16 +2,42 @@
 
 Enables usage of redis cache for SilverStripe.
 
+## Requirements
+
+SilverStripe 4.0.0. or above
+PHP 5.6 or above
+Redis
+
+## Pre-install
+
+Ensure you have redis installed in your environment and configured within your php ini files to ensure PHP knows where to access Redis.
+
+To install Redis, a quick Google with your OS name and version, your PHP version, and server and it's version that your're working with (E.G. Apache or NGINX) should yield a number of installation instructions such as [this installation instruction example.](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04)
+
+Add the following to your php.ini or conf.d/{your-custom-php-config-file}.ini to let PHP know where to communicate with Redis to store session data:
+**Note:** Missing this step will lead to login issues when working with providers such as AWS where you have your site running on multiple pods but need sessions to be unified across them.
+```
+session.save_handler  = redis
+session.save_path     = {your_redis_url}
+```
+
 ## Installation and usage
+
+Use composer to pull this module into your project:
 
 ```
   $ composer require pstaender/silverstripe-redis-cache dev-master
 ```
 
-To enable it in your project add this to your project's config:
+To enable Redis cache in your SilverStripe project, add one or both of the following yaml configs to your project under `/app/_config/` in either their own yaml file, or in an existing file such as `mysite.yml`.
+
+**Note:** The `REDIS_URL` must be the url of the used redis instance, e.g. `tcp://127.0.0.1:6379`.
+
+## Usage in your project
 
 ```yml
 ---
+Name: silverstripe-redis-cache
 After:
   - '#corecache'
   - '#assetscache'
@@ -52,9 +78,7 @@ SilverStripe\Core\Injector\Injector:
     factory: RedisCacheFactory
 ```
 
-The `REDIS_URL` must be the url of the used redis instance, e.g. `tcp://127.0.0.1:6379`.
-
-## Usage with flyststem asset storage
+## Usage with flysystem asset storage
 
 ```yaml
 ---
@@ -74,4 +98,6 @@ SilverStripe\Core\Injector\Injector:
     class: League\Flysystem\Cached\Storage\Predis
 ```
 
-LICENSE: MIT
+## Licence
+
+MIT
