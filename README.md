@@ -4,9 +4,9 @@ Enables usage of redis cache for SilverStripe.
 
 ## Requirements
 
-SilverStripe 4.0.0. or above
-PHP 5.6 or above
-Redis
+  * SilverStripe 4.0.0 or higher
+  * PHP 5.6 or higher
+  * Redis
 
 ## Pre-install
 
