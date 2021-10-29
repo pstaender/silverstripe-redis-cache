@@ -54,14 +54,13 @@ SilverStripe\Core\Injector\Injector:
     constructor:
       client: '%$RedisClient'
   SilverStripe\Core\Cache\CacheFactory: '%$RedisCacheFactory'
+
   # vendor/silverstripe/assets/_config/assetscache.yml
   Psr\SimpleCache\CacheInterface.InterventionBackend_Manipulations:
     factory: RedisCacheFactory
   Psr\SimpleCache\CacheInterface.FileShortcodeProvider:
     factory: RedisCacheFactory
   Psr\SimpleCache\CacheInterface.ImageShortcodeProvider:
-    factory: RedisCacheFactory
-  Psr\SimpleCache\CacheInterface.CampaignMonitor:
     factory: RedisCacheFactory
 
   # vendor/silverstripe/assets/_config/assetscache.yml
