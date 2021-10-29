@@ -54,27 +54,45 @@ SilverStripe\Core\Injector\Injector:
     constructor:
       client: '%$RedisClient'
   SilverStripe\Core\Cache\CacheFactory: '%$RedisCacheFactory'
+  # vendor/silverstripe/assets/_config/assetscache.yml
   Psr\SimpleCache\CacheInterface.InterventionBackend_Manipulations:
     factory: RedisCacheFactory
   Psr\SimpleCache\CacheInterface.FileShortcodeProvider:
     factory: RedisCacheFactory
   Psr\SimpleCache\CacheInterface.ImageShortcodeProvider:
     factory: RedisCacheFactory
+  Psr\SimpleCache\CacheInterface.CampaignMonitor:
+    factory: RedisCacheFactory
+
+  # vendor/silverstripe/assets/_config/assetscache.yml
   Psr\SimpleCache\CacheInterface.Sha1FileHashingService:
     factory: RedisCacheFactory
+
+  # vendor/silverstripe/cms/_config/cache.yml
   Psr\SimpleCache\CacheInterface.CMSMain_SiteTreeHints:
     factory: RedisCacheFactory
   Psr\SimpleCache\CacheInterface.SiteTree_CreatableChildren:
     factory: RedisCacheFactory
+  Psr\SimpleCache\CacheInterface.SiteTree_PageIcons:
+    factory: RedisCacheFactory
+
+  # vendor/silverstripe/cms/_config/permissions.yml +
+  # vendor/silverstripe/framework/_config/cache.yml
+  Psr\SimpleCache\CacheInterface.InheritedPermissions:
+    factory: RedisCacheFactory
+
+  # vendor/silverstripe/framework/_config/cache.yml
   Psr\SimpleCache\CacheInterface.cacheblock:
     factory: RedisCacheFactory
   Psr\SimpleCache\CacheInterface.VersionProvider_composerlock:
     factory: RedisCacheFactory
   Psr\SimpleCache\CacheInterface.RateLimiter:
     factory: RedisCacheFactory
-  Psr\SimpleCache\CacheInterface.InheritedPermissions:
-    factory: RedisCacheFactory
   Psr\SimpleCache\CacheInterface.ThemeResourceLoader:
+    factory: RedisCacheFactory
+  Psr\SimpleCache\CacheInterface.DatabaseAdapterRegistry:
+    factory: RedisCacheFactory
+  Psr\SimpleCache\CacheInterface.EmbedShortcodeProvider:
     factory: RedisCacheFactory
 ```
 
