@@ -19,8 +19,8 @@
       }
   ],
   "require": {
-      "silverstripe/framework": "~4",
-      "predis/predis": "^1.1"
+      "silverstripe/framework": "~4 || ^5",
+      "predis/predis": "^1 || ^2.1.2"
   },
   "require-dev": {
       "phpunit/phpunit": "^5.7"
