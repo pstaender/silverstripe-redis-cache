@@ -6,8 +6,8 @@ Enables usage of redis cache for SilverStripe.
 
 ## Requirements
 
-  * SilverStripe 4.0.0 or higher
-  * PHP 7 or higher
+  * SilverStripe v4
+  * PHP 7.1+
   * Redis
 
 ## Pre-install
