@@ -28,8 +28,7 @@
   },
   "autoload": {
       "psr-4": {
-          "Zeitpulse\\": "src/",
-          "Zeitpulse\\Tests": "tests/"
+          "Zeitpulse\\": "src/"
       }
   },
   "config": {
