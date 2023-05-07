@@ -2,11 +2,13 @@
 
 Enables usage of redis cache for SilverStripe.
 
+![status](https://github.com/pstaender/silverstripe-redis-cache/actions/workflows/ci.yml/badge.svg)
+
 ## Requirements
 
-  * SilverStripe 4.0.0 or higher
-  * PHP 5.6 or higher
+  * SilverStripe v4
   * Redis
+  * Tested on PHP 7.3+
 
 ## Pre-install
 
