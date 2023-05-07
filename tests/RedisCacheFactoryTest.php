@@ -39,15 +39,19 @@ class RedisCacheFactoryTest extends SapphireTest
 
     public function testRedisCacheWithRedisDatabase()
     {
-        $cache = Injector::inst()
-            ->createWithArgs(
-                \Symfony\Component\Cache\Simple\RedisCache::class,
-                [
-                    new \Predis\Client(''),
-                    'TestRedisCache_' . sha1(BASE_PATH),
-                    1000
-                ]
-            );
+
+        $cache =  Injector::inst()
+            ->createWithArgs(\Symfony\Component\Cache\Psr16Cache::class, [
+                Injector::inst()
+                    ->createWithArgs(
+                        \Symfony\Component\Cache\Adapter\RedisAdapter::class,
+                        [
+                            new \Predis\Client(''),
+                            'TestRedisCache_' . sha1(BASE_PATH),
+                            1000,
+                        ]
+                    )
+            ]);
         $cache->set('foo', 'bar');
         $this->assertEquals($cache->get('foo'), 'bar');
     }

@@ -1,5 +1,6 @@
 /assets
 /resources
+/public
 /vendor
 /composer.lock
 /.env
