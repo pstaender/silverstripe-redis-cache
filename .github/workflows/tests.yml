@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   continuous-integration:
-    name: Testing on PHP ${{ matrix.php-versions }})
+    name: Tests on PHP ${{ matrix.php-versions }}
     runs-on: ubuntu-latest
 
     env:
@@ -25,13 +25,13 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
           # MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: SS_test
-        # ports:
-        #   - 3306:3306
+        ports:
+          - 3306:3306
         # options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
       redis:
         image: redis
         ports:
-          - 6379/tcp
+          - 6379:6379
         # options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       # fail-fast: false
