@@ -5,7 +5,6 @@ namespace Zeitpulse\Tests\CacheTest;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\SapphireTest;
 
-
 class RedisCacheFactoryTest extends SapphireTest
 {
     protected function setUp(): void

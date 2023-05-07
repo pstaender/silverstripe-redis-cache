@@ -23,8 +23,8 @@
       "predis/predis": "^1.1"
   },
   "require-dev": {
-      "phpunit/phpunit": "^9.5",
-      "silverstripe/framework": "^4"
+      "phpunit/phpunit": "~9.5",
+      "silverstripe/framework": "~4"
   },
   "autoload": {
       "psr-4": {
