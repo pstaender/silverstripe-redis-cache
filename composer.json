@@ -5,8 +5,8 @@
   "homepage": "https://github.com/pstaender/silverstripe-redis-cache",
   "keywords": [
       "silverstripe",
-      "markdown",
-      "parser"
+      "redis",
+      "cache"
   ],
   "license": "MIT",
   "support": {
@@ -23,11 +23,18 @@
       "predis/predis": "^1 || ^2.1.2"
   },
   "require-dev": {
-      "phpunit/phpunit": "^5.7"
+      "phpunit/phpunit": "~9.5",
+      "silverstripe/framework": "~4"
   },
   "autoload": {
       "psr-4": {
           "Zeitpulse\\": "src/"
       }
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "silverstripe/vendor-plugin": true
+    }
   }
 }
