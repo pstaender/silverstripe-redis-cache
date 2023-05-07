@@ -1,4 +1,4 @@
-name: SilverStripe, MariaDB, & Redis Cache
+name: Tests with SilverStripe and Redis
 
 on: [push]
 
@@ -8,35 +8,23 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      # DB_DATABASE: laravel
-      # DB_USERNAME: root
-      # DB_PASSWORD: password
-      # DB_HOST: 127.0.0.1
-      # DB_PORT: 32574
-      # REDIS_PORT: 6379
-      # SESSION_DRIVER: redis
       MYSQL_ALLOW_EMPTY_PASSWORD: true
-      # MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: SS_test
     services:
       mariadb:
         image: mariadb:10.4
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
-          # MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: SS_test
         ports:
           - 3306:3306
-        # options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
       redis:
         image: redis
         ports:
           - 6379:6379
-        # options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
-      # fail-fast: false
       matrix:
-        php-versions: ['8.2']
+        php-versions: ['8.0', '8.1', '8.2']
 
     steps:
       - name: Checkout
@@ -56,9 +44,9 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          # Use composer.json for key, if composer.lock is not committed.
-          # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          # With composer.lock use:
+          # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install Composer dependencies
