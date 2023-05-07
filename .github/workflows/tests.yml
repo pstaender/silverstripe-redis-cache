@@ -1,0 +1,73 @@
+name: SilverStripe, MariaDB, & Redis Cache
+
+on: [push]
+
+jobs:
+  continuous-integration:
+    name: Testing on PHP ${{ matrix.php-versions }})
+    runs-on: ubuntu-latest
+
+    env:
+      # DB_DATABASE: laravel
+      # DB_USERNAME: root
+      # DB_PASSWORD: password
+      # DB_HOST: 127.0.0.1
+      # DB_PORT: 32574
+      # REDIS_PORT: 6379
+      # SESSION_DRIVER: redis
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      # MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: SS_test
+    services:
+      mariadb:
+        image: mariadb:10.4
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          # MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: SS_test
+        # ports:
+        #   - 3306:3306
+        # options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      redis:
+        image: redis
+        ports:
+          - 6379/tcp
+        # options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    strategy:
+      # fail-fast: false
+      matrix:
+        php-versions: ['8.2']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP with composer 
+        uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, dom, fileinfo, mysql, libxml, xml, xmlwriter, dom, tokenizer, filter, json, phar, pcre, openssl, pdo, intl, curl
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          # Use composer.json for key, if composer.lock is not committed.
+          # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+
+      # - name: Prepare the application
+      #   run: |
+      #     php -r "copy('.env.testing', '.env');"
+      #     php artisan key:generate
+
+      - name: Test with phpunit
+        run: vendor/bin/phpunit --coverage-text
