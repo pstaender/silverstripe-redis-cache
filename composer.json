@@ -19,12 +19,11 @@
       }
   ],
   "require": {
-      "silverstripe/framework": "~4",
-      "predis/predis": "<3"
+      "silverstripe/framework": "~4 || ^5",
+      "predis/predis": "^2.1.2"
   },
   "require-dev": {
-      "phpunit/phpunit": "~9.5",
-      "silverstripe/framework": "~4"
+      "phpunit/phpunit": "~9.5"
   },
   "autoload": {
       "psr-4": {

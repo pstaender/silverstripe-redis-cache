@@ -5,7 +5,8 @@ namespace Zeitpulse;
 use Predis\Client;
 use SilverStripe\Core\Cache\CacheFactory;
 use SilverStripe\Core\Injector\Injector;
-use Symfony\Component\Cache\Simple\RedisCache;
+use Symfony\Component\Cache\Adapter\RedisAdapter;
+use Symfony\Component\Cache\Psr16Cache;
 
 class RedisCacheFactory implements CacheFactory
 {
@@ -26,14 +27,16 @@ class RedisCacheFactory implements CacheFactory
             ? $params['defaultLifetime']
             : 0;
 
-        return Injector::inst()
+        $psr6 = Injector::inst()
             ->createWithArgs(
-                RedisCache::class,
+                RedisAdapter::class,
                 [
                     $this->redis_client,
                     $namespace,
                     $defaultLifetime,
                 ]
             );
+
+        return Injector::inst()->createWithArgs(Psr16Cache::class, [$psr6]);
     }
 }
