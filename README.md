@@ -6,7 +6,7 @@ Enables usage of redis cache for SilverStripe.
 
 ## Requirements
 
-  * SilverStripe v4
+  * SilverStripe v4 / v5
   * Redis
   * Tested on PHP 7.3+
 
@@ -28,7 +28,7 @@ session.save_path     = {your_redis_url}
 Use composer to pull this module into your project:
 
 ```
-  $ composer require pstaender/silverstripe-redis-cache dev-master
+  $ composer require pstaender/silverstripe-redis-cache
 ```
 
 To enable Redis cache in your SilverStripe project, add one or both of the following yaml configs to your project under `/app/_config/` in either their own yaml file, or in an existing file such as `mysite.yml`.
